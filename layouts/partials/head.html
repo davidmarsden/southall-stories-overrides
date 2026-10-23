@@ -1,0 +1,127 @@
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="red">
+  <meta name="theme-color" content="#F4C20D" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1B1B1B" media="(prefers-color-scheme: dark)">
+
+  <title>
+    {{ block "title" . }}
+      {{ if .IsHome }}
+        {{ .Site.Title }}
+      {{ else if .Title }}
+        {{ .Site.Title }} - {{ .Title }}
+      {{ else }}
+        {{ .Site.Title }} - {{ .Summary | truncate 50 }}
+      {{ end }}
+    {{ end }}
+  </title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+  <!-- Original Southall Gasworks “No unauthorised access” image, cropped for the identity system. -->
+  {{ $favicon := "https://southallstories.uk/uploads/2026/file-0000000040348243b574198504e00d0b.png" }}
+  <link rel="shortcut icon" href="{{ $favicon }}" type="image/png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ $favicon }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon }}">
+
+  {{ with .OutputFormats.Get "RSS" }}
+    <link href="{{ .Permalink }}" rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Site.Title }}" />
+    <link href="{{ "podcast.xml" | absURL }}" rel="alternate" type="application/rss+xml" title="Podcast" />
+    <link rel="alternate" type="application/json" title="{{ $.Site.Title }}" href="{{ "feed.json" | absURL }}" />
+    <link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}" />
+  {{ end }}
+
+  <link rel="me" href="https://micro.blog/{{ .Site.Author.username }}" />
+  {{ with .Site.Params.twitter_username }}<link rel="me" href="https://twitter.com/{{ . }}" />{{ end }}
+  {{ with .Site.Params.github_username }}<link rel="me" href="https://github.com/{{ . }}" />{{ end }}
+  {{ with .Site.Params.instagram_username }}<link rel="me" href="https://instagram.com/{{ . }}" />{{ end }}
+
+  <link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth" />
+  <link rel="token_endpoint" href="https://micro.blog/indieauth/token" />
+  <link rel="micropub" href="https://micro.blog/micropub" />
+  <link rel="microsub" href="https://micro.blog/microsub" />
+  <link rel="webmention" href="https://micro.blog/webmention" />
+  <link rel="subscribe" href="https://micro.blog/users/follow" />
+
+  <link id="light" rel="stylesheet" href="{{ "css/bootstrap-light.css" | relURL }}">
+  <link id="dark" rel="stylesheet" href="{{ "css/bootstrap-dark.css" | relURL }}" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/southall-refresh.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/southall-browse.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/southall-pages.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/southall-identity.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/hamburgers.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/loader.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/photoswipe.css" | relURL }}">
+
+  {{ range .Site.Params.plugins_css }}<link rel="stylesheet" href="{{ . }}" />{{ end }}
+  {{ range $filename := .Site.Params.plugins_html }}{{ partial $filename $ }}{{ end }}
+
+  {{ $tagline := "Recording what happens to Southall — and who is responsible." }}
+  {{ $siteDesc := "Digging the dirt, unearthing the truth. Independent local journalism from Southall and across Ealing." }}
+
+  {{ $pagetitle := "" }}
+  {{ if .IsHome }}
+    {{ $pagetitle = "Southall Stories — Independent local journalism" }}
+  {{ else if .Title }}
+    {{ $pagetitle = printf "%s - %s" .Site.Title .Title }}
+  {{ else }}
+    {{ $pagetitle = printf "%s - %s" .Site.Title (.Summary | truncate 50) }}
+  {{ end }}
+
+  {{ $desc := "" }}
+  {{ if .IsHome }}
+    {{ $desc = $siteDesc }}
+  {{ else }}
+    {{ with .Description }}
+      {{ $desc = . }}
+    {{ else }}
+      {{ with .Summary }}{{ $desc = . }}{{ else }}{{ $desc = $siteDesc }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $desc = $desc | plainify | htmlUnescape | truncate 200 }}
+
+  <!-- Default branded card; article posts use their first discovered image when available. -->
+  {{ $image := "https://southallstories.uk/uploads/2026/southall-stories-social-card-whatsapp-600x315.jpg" }}
+  {{ with .Params.images }}
+    {{ if gt (len .) 0 }}{{ $image = (index . 0 | absURL) }}{{ end }}
+  {{ end }}
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta name="description" content="{{ $desc }}">
+  <meta name="author" content="David Marsden">
+  <meta itemprop="name" content="{{ $pagetitle }}">
+  <meta itemprop="description" content="{{ $desc }}">
+  <meta itemprop="image" content="{{ $image }}">
+
+  {{ $ogType := "article" }}
+  {{ if .IsHome }}{{ $ogType = "website" }}{{ end }}
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:type" content="{{ $ogType }}">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="{{ $pagetitle }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:image" content="{{ $image }}">
+  <meta property="og:image:secure_url" content="{{ $image }}">
+  {{ if .IsHome }}
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="315">
+  {{ end }}
+  <meta property="og:image:alt" content="Southall Stories — independent local journalism">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $pagetitle }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ $image }}">
+  <meta name="twitter:image:alt" content="Southall Stories — independent local journalism">
+  <meta name="twitter:creator" content="@DvdMrsdn">
+  <meta name="twitter:site" content="@DvdMrsdn">
+
+</head>
