@@ -1,0 +1,61 @@
+{{ define "main" }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ if eq (len $pages) 0 }}
+  {{ $needle := lower .Title }}
+  {{ $matches := newScratch }}
+  {{ $matches.Set "pages" (slice) }}
+  {{ range .Site.RegularPages }}
+    {{ $page := . }}
+    {{ range .Params.categories }}
+      {{ if eq (lower .) $needle }}
+        {{ $matches.Add "pages" (slice $page) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $pages = sort ($matches.Get "pages") "Date" "desc" }}
+{{ end }}
+<main class="ss-browse ss-taxonomy">
+  <header class="ss-browse-header">
+    <p class="ss-section-label">Browse the reporting</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+      <p class="ss-browse-deck">{{ . }}</p>
+    {{ else }}
+      {{ with .Params.description }}<p class="ss-browse-deck">{{ . }}</p>{{ end }}
+    {{ end }}
+    <p class="ss-browse-count">{{ len $pages }} stor{{ if eq (len $pages) 1 }}y{{ else }}ies{{ end }}</p>
+  </header>
+
+  <section class="ss-browse-grid" aria-label="Stories in {{ .Title }}">
+    {{ range $pages }}
+      {{ $page := . }}
+      {{ $hasImage := false }}
+      {{ with .Params.images }}
+        {{ if gt (len .) 0 }}{{ $hasImage = true }}{{ end }}
+      {{ end }}
+      <article class="ss-browse-card{{ if not $hasImage }} ss-browse-card--text{{ end }}">
+        {{ if $hasImage }}
+          {{ with .Params.images }}
+            <a class="ss-browse-image" href="{{ $page.RelPermalink }}" aria-label="Read {{ $page.Title }}">
+              <img src="{{ index . 0 }}" alt="" loading="lazy">
+            </a>
+          {{ end }}
+        {{ end }}
+        <div class="ss-browse-card-copy">
+          {{ with .Params.categories }}
+            <p class="ss-story-category">{{ index . 0 }}</p>
+          {{ end }}
+          <h2><a href="{{ .RelPermalink }}">{{ if .Title }}{{ .Title }}{{ else }}Untitled post{{ end }}</a></h2>
+          <p class="ss-browse-summary">{{ .Summary | plainify | htmlUnescape | truncate 155 }}</p>
+          <p class="ss-story-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time></p>
+        </div>
+      </article>
+    {{ end }}
+  </section>
+
+  <footer class="ss-browse-footer">
+    <a href="/archive/">Full archive →</a>
+    <a href="/">Back to the front page →</a>
+  </footer>
+</main>
+{{ end }}
