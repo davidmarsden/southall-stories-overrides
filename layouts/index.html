@@ -1,0 +1,105 @@
+{{ define "main" }}
+{{ if .IsHome }}
+{{ $posts := (where .Site.RegularPages.ByDate.Reverse "Type" "post") }}
+
+<main class="ss-home">
+  <header class="ss-home-hero" style="margin:0 0 2.4rem;padding:0 0 2.4rem;border-bottom:1px solid rgba(127,127,127,.28);">
+    <figure class="ss-home-origin" style="margin:0;">
+      <img src="https://southallstories.uk/uploads/2026/img-20180813-102918507-pano.jpg" alt="Southall Gasworks site during remediation works, August 2018" loading="eager" style="display:block!important;width:100%!important;max-width:none!important;height:auto!important;margin:0!important;visibility:visible!important;opacity:1!important;">
+      <figcaption style="margin:.55rem 0 0;font-size:.78rem;line-height:1.4;opacity:.62;">Southall Gasworks during remediation works, August 2018.</figcaption>
+    </figure>
+  </header>
+
+  {{ if gt (len $posts) 0 }}
+  {{ $lead := index $posts 0 }}
+  <section class="ss-lead" aria-labelledby="ss-lead-heading">
+    <p class="ss-section-label">Latest investigation</p>
+    <article class="ss-lead-story">
+      {{ with $lead.Params.images }}
+      <a class="ss-lead-image" href="{{ $lead.Permalink }}">
+        <img src="{{ index . 0 }}" alt="" loading="eager">
+      </a>
+      {{ end }}
+      <div class="ss-lead-copy">
+        {{ with $lead.Params.categories }}
+        <p class="ss-story-category">{{ index . 0 }}</p>
+        {{ end }}
+        <h2 id="ss-lead-heading"><a href="{{ $lead.Permalink }}">{{ if $lead.Title }}{{ $lead.Title }}{{ else }}{{ $lead.Plain | htmlUnescape | truncate 90 }}{{ end }}</a></h2>
+        <p class="ss-deck">{{ $lead.Plain | htmlUnescape | truncate 260 }}</p>
+        <p class="ss-story-meta"><time datetime="{{ $lead.Date.Format "2006-01-02" }}">{{ $lead.Date.Format "2 January 2006" }}</time></p>
+        <p class="ss-read-link"><a href="{{ $lead.Permalink }}">Read the story →</a></p>
+      </div>
+    </article>
+  </section>
+
+  {{ if gt (len $posts) 1 }}
+  <section class="ss-latest" aria-labelledby="ss-latest-heading">
+    <div class="ss-section-heading">
+      <div>
+        <p class="ss-section-label">More reporting</p>
+        <h2 id="ss-latest-heading">Latest stories</h2>
+      </div>
+      <a href="{{ "archive/" | relURL }}">Browse the archive →</a>
+    </div>
+    <div class="ss-story-grid">
+      {{ range first 4 (after 1 $posts) }}
+      {{ $story := . }}
+      <article class="ss-story-card">
+        {{ with .Params.images }}
+        <a class="ss-story-image" href="{{ $story.Permalink }}"><img src="{{ index . 0 }}" alt="" loading="lazy"></a>
+        {{ end }}
+        <div class="ss-story-card-copy">
+          {{ with .Params.categories }}<p class="ss-story-category">{{ index . 0 }}</p>{{ end }}
+          <h3><a href="{{ .Permalink }}">{{ if .Title }}{{ .Title }}{{ else }}{{ .Plain | htmlUnescape | truncate 72 }}{{ end }}</a></h3>
+          <p>{{ .Plain | htmlUnescape | truncate 145 }}</p>
+          <p class="ss-story-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time></p>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+  {{ end }}
+
+  <section class="ss-beats" aria-labelledby="ss-beats-heading">
+    <div class="ss-section-heading">
+      <div>
+        <p class="ss-section-label">Follow the story</p>
+        <h2 id="ss-beats-heading">Reporting by beat</h2>
+      </div>
+    </div>
+    <div class="ss-beat-grid">
+      <a class="ss-beat" href="{{ "categories/investigations/" | relURL }}"><strong>Investigations</strong><span>Documents, decisions, money and accountability.</span></a>
+      <a class="ss-beat" href="{{ "categories/local-democracy/" | relURL }}"><strong>Local democracy</strong><span>Council decisions, elections and public scrutiny.</span></a>
+      <a class="ss-beat" href="{{ "categories/environment/" | relURL }}"><strong>Environment &amp; health</strong><span>Pollution, development, air quality and public health.</span></a>
+      <a class="ss-beat" href="{{ "categories/community/" | relURL }}"><strong>Community</strong><span>People, campaigns and life in Southall.</span></a>
+    </div>
+  </section>
+
+  <section class="ss-commons" aria-labelledby="ss-commons-heading">
+    <div class="ss-commons-mark">
+      <img src="https://ealing.civiccommons.co.uk/brand/ealing-oak-approved.webp" alt="Ealing Civic Commons oak mark" loading="lazy">
+    </div>
+    <div>
+      <p class="ss-section-label">A Southall Stories project</p>
+      <h2 id="ss-commons-heading">Ealing Civic Commons</h2>
+      <p>Gathering what’s happening to our towns — and who’s deciding it. A civic memory and public-information project for the whole borough.</p>
+      <p class="ss-read-link"><a href="https://ealing.civiccommons.co.uk/">Explore Ealing Civic Commons →</a></p>
+    </div>
+  </section>
+
+  <section class="ss-home-footer" aria-label="Southall Stories information">
+    <div>
+      <p class="ss-section-label">About this work</p>
+      <h2>Independent, sourced and rooted here.</h2>
+      <p>Southall Stories follows local power over time: not just what was announced today, but what was promised yesterday and what actually happened next. <em>Digging the dirt, unearthing the truth.</em></p>
+    </div>
+    <div class="ss-home-links">
+      <a href="{{ "about/" | relURL }}">About Southall Stories →</a>
+      <a href="{{ "subscribe/" | relURL }}">Subscribe →</a>
+      <a href="{{ "archive/" | relURL }}">Full archive →</a>
+    </div>
+  </section>
+</main>
+{{ end }}
+{{ end }}
