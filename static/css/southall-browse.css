@@ -1,0 +1,333 @@
+/* Southall Stories — archive, categories and second-pass polish */
+
+.ss-browse {
+  max-width: 70rem;
+  margin: 0 auto 5rem;
+}
+
+.ss-browse-header {
+  padding: 0.4rem 0 2rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.28);
+}
+
+.ss-browse-header h1 {
+  max-width: 54rem;
+  margin: 0;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+.ss-browse-deck {
+  max-width: 48rem;
+  margin: 1rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.ss-browse-count {
+  margin: 1rem 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.58;
+}
+
+.ss-browse-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.ss-browse-card {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  min-height: 12rem;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+}
+
+.ss-browse-card--text {
+  grid-template-columns: 1fr;
+}
+
+.ss-browse-card--text .ss-browse-card-copy {
+  padding: 1.25rem;
+}
+
+.ss-browse-image {
+  display: block;
+  overflow: hidden;
+  min-height: 12rem;
+  background: rgba(127, 127, 127, 0.08);
+  line-height: 0;
+}
+
+.ss-browse-image img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ss-browse-card-copy {
+  padding: 1.1rem;
+}
+
+.ss-browse-card h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.35rem;
+  line-height: 1.08;
+}
+
+.ss-browse-card h2 a {
+  color: inherit;
+}
+
+.ss-browse-summary {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.ss-browse-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.28);
+  font-weight: 700;
+}
+
+.ss-year-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1.25rem 0 1.8rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.28);
+}
+
+.ss-year-nav a {
+  display: inline-block;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(127, 127, 127, 0.34);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.ss-archive-year {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.28);
+  scroll-margin-top: 1rem;
+}
+
+.ss-archive-year-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.ss-archive-year-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.ss-archive-year-heading a {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.ss-archive-list {
+  border-top: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.ss-archive-row {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.ss-archive-row > time {
+  padding-top: 0.14rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+.ss-archive-row h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.ss-archive-row h3 a {
+  color: inherit;
+}
+
+.ss-archive-cats {
+  margin: 0.35rem 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  opacity: 0.62;
+}
+
+.ss-archive-more {
+  margin-left: 0.25rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Article polish after the first live pass */
+.ss-article-body h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.ss-article-body h3 {
+  margin-top: 2.35rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Give the left rail a calmer rhythm across the publication. */
+#sidebar .ss-brand {
+  padding-bottom: 0.35rem !important;
+}
+
+#sidebar .ss-brand-deck {
+  max-width: 12.5rem;
+}
+
+#sidebar .ss-nav {
+  margin-top: 0.8rem;
+}
+
+#sidebar .ss-nav li {
+  margin-bottom: 0.85rem !important;
+}
+
+#sidebar .ss-nav a {
+  line-height: 1.25;
+}
+
+/* On long reads, the rail should support the article rather than compete with it. */
+body:has(.ss-article) #sidebar .ss-nav a {
+  font-size: 0.9rem;
+  opacity: 0.82;
+}
+
+body:has(.ss-article) #sidebar .ss-brand-deck,
+body:has(.ss-article) #sidebar .council-readership {
+  opacity: 0.5;
+}
+
+/* Tighten the homepage lead without changing its hierarchy. */
+body:has(.ss-home) .ss-lead-story {
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.95fr);
+}
+
+body:has(.ss-home) .ss-lead-image img {
+  min-height: 22rem;
+  max-height: 31rem;
+}
+
+/* The floating topic drawer is mainly useful when the full topic rail isn't visible. */
+#sidebar-toggle {
+  display: none !important;
+}
+
+@media (max-width: 1199px) {
+  #sidebar-toggle {
+    display: block !important;
+    opacity: 0.86;
+  }
+}
+
+/* Bring Micro.blog's conversation form closer to the publication styling. */
+.ss-article ~ form,
+.ss-article + form,
+#conversation form,
+.microblog_conversation form {
+  border-color: rgba(127, 127, 127, 0.28) !important;
+  border-radius: 0 !important;
+}
+
+.microblog_conversation {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.microblog_reply_textarea textarea {
+  border-radius: 0 !important;
+  border-color: rgba(127, 127, 127, 0.35) !important;
+  background: transparent !important;
+  color: inherit !important;
+}
+
+@media (max-width: 900px) {
+  .ss-browse-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body:has(.ss-home) .ss-lead-story {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .ss-browse-header h1 {
+    font-size: clamp(2.6rem, 13vw, 4.5rem);
+  }
+
+  .ss-browse-card {
+    grid-template-columns: 8rem minmax(0, 1fr);
+  }
+
+  .ss-browse-card--text {
+    grid-template-columns: 1fr;
+  }
+
+  .ss-browse-image {
+    min-height: 10rem;
+  }
+
+  .ss-archive-row {
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  #sidebar-toggle {
+    right: 1rem !important;
+    bottom: 1rem !important;
+    padding: 0.45rem 0.75rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .ss-browse-card {
+    grid-template-columns: 1fr;
+  }
+
+  .ss-browse-image {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .ss-archive-year-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
