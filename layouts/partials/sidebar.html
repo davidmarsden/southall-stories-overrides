@@ -1,0 +1,40 @@
+<div class="ss-brand p-2">
+    <a class="ss-brand-link no-under" href="/" aria-label="Southall Stories home">
+        <span class="ss-brand-name">Southall Stories</span>
+        <span class="ss-brand-tag">Independent local journalism</span>
+    </a>
+</div>
+
+<div class="px-2 pt-2 pb-1">
+    <p class="ss-brand-deck mb-1">Recording what happens to Southall — and who is responsible.</p>
+    <p class="ss-brand-shortline mb-1">Local people. Local questions.</p>
+    <p class="ss-brand-character mb-0">Digging the dirt, unearthing the truth.</p>
+</div>
+
+<div class="px-2 pt-1 pb-2">
+    <p class="council-readership mb-0">As read by Ealing Council’s Press Office</p>
+</div>
+
+<div class="p-2 d-flex justify-content-start flex-wrap social-icons">
+    {{ partial "social-icons.html" . }}
+</div>
+
+<div class="pt-2 ss-nav">
+    {{ $url := .RelPermalink }}
+    <li class="px-2 mb-3 list-unstyled">
+        <a class="{{ if .IsHome }}home-active{{ end }}" href="/">Home</a>
+    </li>
+    <li class="px-2 mb-3 list-unstyled"><a href="/categories/investigations/">Investigations</a></li>
+    <li class="px-2 mb-3 list-unstyled"><a href="/categories/local-democracy/">Local democracy</a></li>
+    <li class="px-2 mb-3 list-unstyled"><a href="/categories/environment/">Environment &amp; health</a></li>
+    <li class="px-2 mb-3 list-unstyled"><a href="https://ealing.civiccommons.co.uk/">Civic Commons ↗</a></li>
+    {{ range .Site.Menus.main }}
+    <li class="px-2 mb-3 list-unstyled">
+        {{ if .Page.Params.redirect }}
+        <a class="{{ if eq .URL $url }}home-active{{ end }}" href="{{ .Page.Params.redirect }}">{{ .Name }}</a>
+        {{ else }}
+        <a class="{{ if eq .URL $url }}home-active{{ end }}" href="{{ .URL | relLangURL | safeURL }}">{{ .Name }}</a>
+        {{ end }}
+    </li>
+    {{ end }}
+</div>
