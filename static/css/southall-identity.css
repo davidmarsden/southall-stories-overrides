@@ -1,0 +1,65 @@
+/* Southall Stories — identity system */
+
+.ss-brand-shortline {
+  font-size: 0.76rem;
+  line-height: 1.35;
+  font-weight: 800;
+  color: #c99a0a;
+}
+
+.ss-brand-character {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  font-style: italic;
+  opacity: 0.68;
+}
+
+.ss-home-hero {
+  margin: 0 0 2.4rem;
+  padding: 0 0 2.4rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.28);
+}
+
+.ss-home-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.ss-home-intro-fallback {
+  display: none;
+}
+
+.ss-home-intro > p:last-child::first-line {
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ss-brand-shortline {
+    color: #f4c430;
+  }
+}
+
+@media (max-width: 700px) {
+  .ss-brand-shortline,
+  .ss-brand-character {
+    max-width: 22rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .ss-home-hero {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .ss-home-banner {
+    display: none;
+  }
+
+  .ss-home-intro-fallback {
+    display: block;
+  }
+}
