@@ -1,0 +1,96 @@
+{{ define "main" }}
+<article class="ss-article h-entry">
+  <header class="ss-article-header">
+    {{ if .Params.Categories }}
+    <div class="ss-article-kicker">
+      {{ range first 1 .Params.Categories }}
+      <a href="{{ $.Site.BaseURL }}/categories/{{ . | urlize }}">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if .Title }}
+    <h1 class="ss-article-title p-name">{{ .Title }}</h1>
+    {{ end }}
+
+    {{ with .Description }}
+    <p class="ss-article-deck">{{ . }}</p>
+    {{ end }}
+
+    <div class="ss-article-meta">
+      <span>By David Marsden</span>
+      <span aria-hidden="true">•</span>
+      <time class="dt-published" datetime="{{ .Date.Format "2006-01-02 15:04:05 -0700" }}">{{ .Date.Format "2 January 2006" }}</time>
+      {{ if .Site.Params.showReadingTime }}
+      <span aria-hidden="true">•</span>
+      <span>{{ .ReadingTime }} min read</span>
+      {{ end }}
+    </div>
+
+    {{ if .Params.Categories }}
+    <nav class="ss-article-categories" aria-label="Article categories">
+      {{ range .Params.Categories }}
+      <a href="{{ $.Site.BaseURL }}/categories/{{ . | urlize }}">{{ . }}</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+  </header>
+
+  <div class="ss-article-body e-content" id="my-gallery">
+    {{ .Content }}
+  </div>
+
+  <div class="ss-article-end" aria-label="End of article">
+    <span></span><strong>End of article</strong><span></span>
+  </div>
+
+  <section class="ss-share" aria-labelledby="ss-share-heading">
+    <p class="ss-section-label">Pass it on</p>
+    <h2 id="ss-share-heading">Share this story</h2>
+    <div class="ss-share-links">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | urlquery }}" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+      <a href="https://bsky.app/intent/compose?text={{ printf "%s %s" .Title .Permalink | urlquery }}" target="_blank" rel="noopener noreferrer">Bluesky ↗</a>
+      <a href="https://wa.me/?text={{ printf "%s %s" .Title .Permalink | urlquery }}" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+      <a href="mailto:?subject={{ .Title | urlquery }}&body={{ .Permalink | urlquery }}">Email</a>
+    </div>
+  </section>
+
+  <section class="ss-support" aria-labelledby="ss-support-heading">
+    <p class="ss-section-label">Keep it independent</p>
+    <h2 id="ss-support-heading">Support Southall Stories</h2>
+    <p>Southall Stories is independent, community-focused journalism covering local politics, planning, the environment and public life across Southall and Ealing. Everything is free to read, with no corporate or political funding.</p>
+    <div class="ss-support-grid">
+      <div>
+        <h3>One-off donation</h3>
+        <p>Help cover the costs of research, Freedom of Information requests and document analysis.</p>
+        <p><a class="ss-button" href="https://buy.stripe.com/fZueVf9nM1znbC90HH2ZO01" target="_blank" rel="noopener noreferrer">Donate with Stripe →</a></p>
+      </div>
+      <div>
+        <h3>Monthly supporter</h3>
+        <p>Help fund future investigations with a regular contribution.</p>
+        <p><a class="ss-button" href="https://buy.stripe.com/fZu00larQfqd8pX4XX2ZO02" target="_blank" rel="noopener noreferrer">Become a supporter →</a></p>
+      </div>
+    </div>
+    <p class="ss-support-alt">Also available: <a href="https://www.paypal.me/gdmarsden" target="_blank" rel="noopener noreferrer">PayPal</a> · <a href="https://monzo.me/davidmarsden42?h=0JQZ0n" target="_blank" rel="noopener noreferrer">Monzo</a></p>
+  </section>
+
+  <footer class="ss-article-footer">
+    <div>
+      <p class="ss-section-label">Keep the conversation going</p>
+      <div class="ss-response-links">
+        {{ partial "reply-by-email.html" . }}
+        {{ partial "conversation-link.html" . }}
+      </div>
+    </div>
+    <div class="ss-article-footer-links">
+      <a href="/archive/">Full archive →</a>
+      <a href="/about/">About Southall Stories →</a>
+      <a href="https://ealing.civiccommons.co.uk/">Ealing Civic Commons →</a>
+    </div>
+  </footer>
+</article>
+
+{{ if .Site.Params.include_conversation }}
+<script type="text/javascript" src="https://micro.blog/conversation.js?url={{ .Permalink }}"></script>
+{{ end }}
+{{ end }}
