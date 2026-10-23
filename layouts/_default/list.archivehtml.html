@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{ $posts := (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
+{{ $years := slice }}
+{{ range $posts }}
+  {{ $year := .Date.Format "2006" }}
+  {{ if not (in $years $year) }}{{ $years = $years | append $year }}{{ end }}
+{{ end }}
+
+<main class="ss-browse ss-archive" id="top">
+  <header class="ss-browse-header">
+    <p class="ss-section-label">The record</p>
+    <h1>Archive</h1>
+    <p class="ss-browse-deck">Years of reporting on Southall, Ealing, local power, development, public health and the decisions that shape everyday life.</p>
+    <p class="ss-browse-count">{{ len $posts }} published stor{{ if eq (len $posts) 1 }}y{{ else }}ies{{ end }}</p>
+  </header>
+
+  <nav class="ss-year-nav" aria-label="Archive years">
+    {{ range $years }}<a href="#year-{{ . }}">{{ . }}</a>{{ end }}
+  </nav>
+
+  {{ $currentYear := "" }}
+  {{ range $posts }}
+    {{ $year := .Date.Format "2006" }}
+    {{ if ne $year $currentYear }}
+      {{ if ne $currentYear "" }}</div></section>{{ end }}
+      {{ $currentYear = $year }}
+      <section class="ss-archive-year" id="year-{{ $year }}">
+        <div class="ss-archive-year-heading">
+          <h2>{{ $year }}</h2>
+          <a href="#top">Back to top ↑</a>
+        </div>
+        <div class="ss-archive-list">
+    {{ end }}
+
+    <article class="ss-archive-row">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan" }}</time>
+      <div>
+        <h3><a href="{{ .RelPermalink }}">{{ if .Title }}{{ .Title }}{{ else }}Untitled post{{ end }}</a></h3>
+        {{ with .Params.categories }}
+          <p class="ss-archive-cats">
+            {{ range $i, $cat := first 3 . }}{{ if $i }} · {{ end }}<a href="{{ printf "/categories/%s/" ($cat | urlize) }}">{{ $cat }}</a>{{ end }}{{ if gt (len .) 3 }} <span class="ss-archive-more">+{{ sub (len .) 3 }} more</span>{{ end }}
+          </p>
+        {{ end }}
+      </div>
+    </article>
+  {{ end }}
+  {{ if gt (len $posts) 0 }}</div></section>{{ end }}
+
+  <footer class="ss-browse-footer">
+    <a href="/">Front page →</a>
+    <a href="/about/">About Southall Stories →</a>
+  </footer>
+</main>
+{{ end }}
