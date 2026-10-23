@@ -1,0 +1,145 @@
+.post-content, .e-content {
+  font-size: 1.1rem;
+  line-height: 1.85;
+}
+
+/* ── Widen content by hiding right metadata sidebar on smaller screens ── */
+#meta, div#meta, div.col-3#meta, 
+div.d-none#meta, div[id="meta"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ── On xl screens, narrow left sidebar to give content more room ── */
+#sidebar {
+  max-width: 180px;
+}
+
+/* ── Post list readability ── */
+.post-list .card {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 0;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Body text size and spacing ── */
+.post-content, .e-content {
+  font-size: 1.1rem;
+  line-height: 1.85;
+  max-width: 680px;
+}
+
+/* ── Tighten category tag clutter ── */
+.post-list h4 {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  display: inline;
+  margin-right: 0.3em;
+  font-family: sans-serif;
+}
+
+/* =========================================================
+   Reply-by-email + Conversation link alignment (inside .card)
+   ========================================================= */
+
+/* Your two paragraphs that contain the links */
+.card.perma > p {
+  margin: 0.75rem 0 0;     /* space above first link */
+  padding: 0 1rem;         /* match typical card-body horizontal padding */
+}
+
+/* Keep the second line slightly closer */
+.card.perma > p + p {
+  margin-top: 0.35rem;
+}
+
+/* Style the links consistently */
+.card.perma > p a.reply-by-email,
+.card.perma > p a.conversation-on-mb,
+.card.perma > p a.conversation-on-microblog {
+  display: inline-block;
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+/* Hover */
+.card.perma > p a.reply-by-email:hover,
+.card.perma > p a.conversation-on-mb:hover,
+.card.perma > p a.conversation-on-microblog:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.card.perma .mb-aux-links {
+  padding: 0 1rem;
+  margin: 0.75rem 0 0;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card.perma .mb-aux-links a {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.card.perma .mb-aux-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+#content .archive_categories,
+#content .archive_years {
+  display: none !important;
+}
+
+.perma ~ .archive_categories,
+.perma ~ .archive_years {
+  display: none;
+}
+
+#content > .archive_categories,
+#content > .archive_years {
+  display: none !important;
+}
+
+@media all {
+  #meta { display: none !important; }
+}
+
+
+
+a {
+  text-decoration-style: solid !important;
+  text-underline-offset: 0.2rem !important;
+}
+
+/* Sidebar toggle */
+#meta {
+  display: none !important;
+}
+
+#sidebar-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  background: #c99a0a;
+  color: #f5f0e8;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 400;
+}
