@@ -1,0 +1,6 @@
+{
+  "version": "0.2.0",
+  "title": "Southall Stories overrides (test candidate)",
+  "description": "Test-only Micro.blog overrides candidate; install on davidmarsden-test, not production.",
+  "includes": []
+}
