@@ -1,0 +1,40 @@
+{{ define "main" }}
+<main class="ss-page">
+  <header class="ss-page-header">
+    <p class="ss-section-label">
+      {{ if eq .Title "About" }}About this work
+      {{ else if eq .Title "Read Me" }}Start here
+      {{ else if eq .Title "Campaigns" }}Campaigns &amp; public interest
+      {{ else if or (eq .Title "Search") (eq .Title "Search Space") }}Find the reporting
+      {{ else if eq .Title "Subscribe" }}Stay with the story
+      {{ else if or (eq .Title "Local links & resources") (eq .Title "Local links &amp; resources") (eq .Title "Resources") }}Around Southall &amp; Ealing
+      {{ else }}Southall Stories{{ end }}
+    </p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}
+      <p class="ss-page-deck">{{ . }}</p>
+    {{ else }}
+      {{ with .Params.description }}<p class="ss-page-deck">{{ . }}</p>{{ end }}
+    {{ end }}
+  </header>
+
+  <article class="ss-page-body e-content">
+    {{ .Content }}
+  </article>
+
+  <footer class="ss-page-footer">
+    <div>
+      <p class="ss-section-label">Keep exploring</p>
+      <div class="ss-page-footer-links">
+        {{ if ne .RelPermalink "/about/" }}<a href="/about/">About Southall Stories →</a>{{ end }}
+        {{ if ne .RelPermalink "/archive/" }}<a href="/archive/">Full archive →</a>{{ end }}
+        <a href="https://ealing.civiccommons.co.uk/">Ealing Civic Commons →</a>
+      </div>
+    </div>
+    <div class="ss-page-footer-note">
+      <p><strong>Independent local journalism.</strong></p>
+      <p>Reporting from Southall and across Ealing on local democracy, planning, environment, health and community life.</p>
+    </div>
+  </footer>
+</main>
+{{ end }}
