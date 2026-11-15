@@ -2,7 +2,7 @@
 
 Micro.blog plugin candidate for Southall Stories, layered on the Microwave base theme.
 
-**Status: incomplete staging, not production-ready.** The existing custom theme remains authoritative until a test blog build passes. This repository contains the selected editorial layouts, mobile navigation and Southall styles. Some dependencies, including archive templates and inherited partials, require verification.
+**Status: test candidate.** See `docs/production-checklist.md` for what is confirmed and what remains. The existing custom theme remains authoritative until a test blog build passes. This repository contains the selected editorial layouts, mobile navigation and Southall styles. Some dependencies, including archive templates and inherited partials, require verification.
 
 ## Test procedure
 
@@ -13,7 +13,7 @@ Micro.blog plugin candidate for Southall Stories, layered on the Microwave base 
 
 ## Data pages
 
-The homepage has a "Data pages" section (`layouts/partials/data-pages.html`) linking to data.southallstories.uk, and both navigation menus link to the data site. To add a data page, copy one card in that partial.
+The homepage has a "Data pages" section (`layouts/partials/data-pages.html`) linking to data.southallstories.uk. To add a data page, copy one card in that partial. The menu link comes from the "Data pages" page in Micro.blog, not from the plugin.
 
 ## Ownership
 
