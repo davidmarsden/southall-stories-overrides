@@ -11,6 +11,10 @@ Micro.blog plugin candidate for Southall Stories, layered on the Microwave base 
 3. Rebuild and inspect logs. Verify homepage, article, category, archive, search, mobile navigation, social metadata and light/dark colours.
 4. If broken, disable the plugin and restore the original test configuration. Do not enable it on southallstories.uk yet.
 
+## Data pages
+
+The homepage has a "Data pages" section (`layouts/partials/data-pages.html`) linking to data.southallstories.uk, and both navigation menus link to the data site. To add a data page, copy one card in that partial.
+
 ## Ownership
 
 The plugin owns Southall-specific templates and assets. Micro.blog owns content and configuration. Microwave owns inherited assets. Third-party plugins (SocialSpec, Search Space, Collections) remain separately managed.
