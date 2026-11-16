@@ -254,6 +254,37 @@
   opacity: 0.72;
 }
 
+.ss-data {
+  margin: 2.5rem 0;
+}
+
+.ss-data-intro {
+  max-width: 46rem;
+  margin: -0.4rem 0 1.1rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.ss-data-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .ss-data-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ss-data-card {
+  border-left: 4px solid #c99a0a;
+}
+
+.ss-data-card strong::after {
+  content: " ↗";
+  font-weight: 400;
+  opacity: 0.6;
+}
+
 .ss-commons {
   display: grid;
   grid-template-columns: 8rem minmax(0, 1fr);
