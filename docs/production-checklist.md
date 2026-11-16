@@ -18,7 +18,7 @@ Status at 15 November 2026, from comparing southallstories.uk with davidmarsden-
 ## Still to do before switching
 
 1. **Give the test blog content.** It has no posts, so the article layout, category pages, the homepage lead story and search have never been tested. Import 5 to 10 real posts with categories, images and a title-less note, and add the Search Space page.
-2. **Install the same third-party plugins as production**: SocialSpec, Search Space and Collections. Production loads `collections.css` and `studio.js`; the test blog does not.
+2. **Install the same third-party plugins as production**: SocialSpec, Search Space, Collections, and whichever plugins provide the "Reply by email" and "Also on Micro.blog" links (`reply-by-email.html`, `conversation-link.html`). The article template skips those links if their partials are missing, rather than failing the build. Production loads `collections.css` and `studio.js`; the test blog does not.
 3. **Merge to `main`**, rebuild the test blog, and check the build log.
 4. **Compare page by page** at desktop and phone width, light and dark: home, an article, a category, archive, search, about, subscribe. Check social previews with a link-preview tool.
 5. **Back up**: export the production theme and note its settings.

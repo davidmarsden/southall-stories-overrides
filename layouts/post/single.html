@@ -78,8 +78,8 @@
     <div>
       <p class="ss-section-label">Keep the conversation going</p>
       <div class="ss-response-links">
-        {{ partial "reply-by-email.html" . }}
-        {{ partial "conversation-link.html" . }}
+        {{ if templates.Exists "partials/reply-by-email.html" }}{{ partial "reply-by-email.html" . }}{{ end }}
+        {{ if templates.Exists "partials/conversation-link.html" }}{{ partial "conversation-link.html" . }}{{ end }}
       </div>
     </div>
     <div class="ss-article-footer-links">
