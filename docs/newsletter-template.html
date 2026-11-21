@@ -1,0 +1,50 @@
+<!-- Micro.blog newsletter template for southallstories.uk -->
+<div style="margin:0;padding:0;background:#111;color:#111;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <div style="max-width:640px;margin:0 auto;padding:26px 22px 34px;">
+    <div style="background:#f4c430;padding:18px 20px;border-bottom:6px solid #111;">
+      <a href="{{ .Site.BaseURL }}" style="text-decoration:none;color:#111;">
+        <div style="font-size:34px;line-height:1;font-weight:900;letter-spacing:-1.4px;text-transform:uppercase;">Southall Stories</div>
+      </a>
+      <div style="margin-top:9px;font-size:11px;line-height:1.45;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#111;">Recording what happens to Southall – and who is responsible.</div>
+    </div>
+
+    <div style="background:#f3efe3;padding:24px 22px 30px;">
+      {{ if gt (len .Intro) 0 }}
+        <div style="margin:0 0 22px;padding:15px 16px;border-left:5px solid #c99a0a;background:#fffaf0;color:#262626;font-size:15px;line-height:1.65;">{{ .Intro }}</div>
+      {{ end }}
+
+      {{ range .Pages }}
+        <article style="margin:0 0 26px;padding:0 0 28px;border-bottom:2px solid #d7cfbd;">
+          {{ if .Title }}<h1 style="margin:0 0 12px;font-size:29px;line-height:1.14;font-weight:900;letter-spacing:-.6px;color:#111;">{{ .Title }}</h1>{{ end }}
+
+          {{ with .Params.audio }}
+            <div style="margin:0 0 20px;padding:14px 16px;background:#fffaf0;border-left:5px solid #f4c430;">
+              <audio controls style="display:block;width:100%;max-width:100%;margin:0 0 10px;">
+                <source src="{{ . }}">
+              </audio>
+              <a href="{{ $.Permalink }}" style="display:inline-block;padding:10px 15px;background:#111;color:#f4c430;font-weight:800;text-decoration:none;">Listen on Southall Stories →</a>
+            </div>
+          {{ end }}
+
+          {{ with .Params.video }}
+            <p style="margin:0 0 20px;"><a href="{{ $.Permalink }}" style="display:inline-block;padding:10px 15px;background:#111;color:#f4c430;font-weight:800;text-decoration:none;">Watch video</a></p>
+          {{ end }}
+
+          <div style="font-size:16px;line-height:1.72;color:#252525;">{{ .Content }}</div>
+
+          <p style="margin:22px 0 0;"><a href="{{ .Permalink }}" style="display:inline-block;padding:10px 16px;background:#f4c430;color:#111;font-weight:900;text-decoration:none;border:1px solid #c99a0a;">Read on Southall Stories →</a></p>
+          <p style="margin:12px 0 0;font-size:12px;line-height:1.5;color:#6c6558;">{{ .Date.Format "2 January 2006" }}</p>
+        </article>
+      {{ end }}
+
+      <div style="font-size:12px;line-height:1.7;color:#6c6558;">
+        <div style="margin-bottom:6px;font-size:14px;font-weight:900;color:#111;text-transform:uppercase;">Southall Stories</div>
+        <div style="margin-bottom:12px;color:#4d473d;">Recording what happens to Southall – and who is responsible.</div>
+        <div><a href="{{ .Site.BaseURL }}" style="color:#7a5c00;font-weight:700;text-decoration:none;">{{ .Site.Hostname }}</a></div>
+        {{ if eq (len .Pages) 1 }}{{ with index .Pages 0 }}<div><a href="{{ .Permalink }}" style="color:#4d473d;text-decoration:underline;">View in browser</a></div>{{ end }}{{ end }}
+        <div><a href="{{ .Footer.UnsubscribeURL }}" style="color:#4d473d;text-decoration:underline;">Unsubscribe</a></div>
+        {{ if gt (len .Footer.MailingAddress) 0 }}<div style="margin-top:10px;">{{ .Footer.MailingAddress }}</div>{{ end }}
+      </div>
+    </div>
+  </div>
+</div>
